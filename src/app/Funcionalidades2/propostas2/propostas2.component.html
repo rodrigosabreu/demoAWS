@@ -1,0 +1,36 @@
+<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+  <thead>
+    <tr>
+      <th
+        class="sorting sorting_asc"
+        tabindex="0"
+        aria-controls="example2"
+        rowspan="1"
+        colspan="1"
+        aria-label="Rendering engine: activate to sort column descending"
+        aria-sort="ascending"
+      >
+        Proposta
+      </th>
+      <th>CPF</th>
+      <th>Data de envio</th>
+      <th>Valor financiado</th>
+      <th>Taxa Anual</th>
+      <th>Status Detalhado</th>
+      <th>Canal de entrada</th>
+      <th>Produto</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let p of propostas">
+      <td>{{ p.id_proposta }}</td>
+      <td>{{ p.cpf_cliente }}</td>
+      <td>{{ p.datas.envio }}</td>
+      <td>{{ p.valores.credito_solicitado }}</td>
+      <td>{{ p.valores.taxa_juros_anual }}</td>
+      <td>{{ p.status.descricao_credito }}</td>
+      <td>{{ p.canal_entrada }}</td>
+      <td>{{ p.produto }}</td>
+    </tr>
+  </tbody>
+</table>

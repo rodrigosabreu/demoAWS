@@ -1,0 +1,212 @@
+<app-loading *ngIf="loading"></app-loading>
+
+<div class="row">
+  <div class="col-lg-3 col-6">
+    <!-- small box -->
+    <a (click)="mudarSelectStatusDetalhado('')" style="cursor: pointer">
+      <div class="small-box bg-info">
+        <div class="inner">
+          <h3>{{ countDescricaoCreditoEnviado }}</h3>
+
+          <p>PROPOSTAS ENVIADAS</p>
+        </div>
+        <div class="icon">
+          <i class="ion ion-bag"></i>
+        </div>
+        <a href="#" class="small-box-footer"
+          >{{
+            somatorioValorFinanciadoEnviadas | currency: "BRL":true:"1.2-2":"pt"
+          }}
+          <i class="fas fa-arrow-circle-right"></i
+        ></a>
+      </div>
+    </a>
+  </div>
+  <!-- ./col -->
+  <div class="col-lg-3 col-6">
+    <!-- small box -->
+    <a
+      (click)="mudarSelectStatusDetalhado('Aprovada automaticamente')"
+      style="cursor: pointer"
+    >
+      <div class="small-box bg-success">
+        <div class="inner">
+          <h3>{{ countDescricaoCreditoAprovado }}</h3>
+
+          <p>PROPOSTA APROVADAS</p>
+        </div>
+        <div class="icon">
+          <i class="ion ion-stats-bars"></i>
+        </div>
+
+        <a href="#" class="small-box-footer"
+          >{{
+            somatorioValorFinanciadoAprovadas
+              | currency: "BRL":true:"1.2-2":"pt"
+          }}
+          <i class="fas fa-arrow-circle-right"></i
+        ></a>
+      </div>
+    </a>
+  </div>
+
+  <!-- ./col -->
+  <div class="col-lg-3 col-6">
+    <a
+      (click)="mudarSelectStatusDetalhado('Aprovação Condicionada')"
+      style="cursor: pointer"
+    >
+      <!-- small box -->
+      <div class="small-box bg-warning">
+        <div class="inner">
+          <h3>{{ countDescricaoCreditoCondicionado }}</h3>
+
+          <p>PROPOSTAS CONDICIONADAS</p>
+        </div>
+        <div class="icon">
+          <i class="ion ion-person-add"></i>
+        </div>
+        <a href="#" class="small-box-footer"
+          >{{
+            somatorioValorFinanciadoCondicionadas
+              | currency: "BRL":true:"1.2-2":"pt"
+          }}
+          <i class="fas fa-arrow-circle-right"></i
+        ></a>
+      </div>
+    </a>
+  </div>
+  <!-- ./col -->
+  <div class="col-lg-3 col-6">
+    <a
+      (click)="mudarSelectStatusDetalhado('Proposta Recusada')"
+      style="cursor: pointer"
+    >
+      <!-- small box -->
+      <div class="small-box bg-danger">
+        <div class="inner">
+          <h3>{{ countDescricaoCreditoRecusada }}</h3>
+
+          <p>PROPOSAS RECUSADAS</p>
+        </div>
+        <div class="icon">
+          <i class="ion ion-pie-graph"></i>
+        </div>
+        <a href="#" class="small-box-footer"
+          >{{
+            somatorioValorFinanciadoRecusadas
+              | currency: "BRL":true:"1.2-2":"pt"
+          }}
+          <i class="fas fa-arrow-circle-right"></i
+        ></a>
+      </div>
+    </a>
+  </div>
+  <!-- ./col -->
+</div>
+
+<div class class="row" style="margin-bottom: 1em; margin-top: 1.333em">
+  <div class="col-md-2 col-xs-12">
+    <label for="cboProposta">Proposta</label>
+    <input
+      type="text"
+      class="form-control"
+      name="cboProposta"
+      placeholder="Busca por Proposta"
+      (keyup)="buscarIdProposta($event.target)"
+    />
+  </div>
+
+  <div class="col-md-2 col-xs-12" id="divcboProduto">
+    <label for="txtProduto">Produto</label>
+    <select
+      name="cboProduto"
+      id="cboProduto"
+      class="form-control"
+      (change)="buscarProdutoProposta($event.target)"
+    >
+      <option value="todos">Todos</option>
+      <option
+        [value]="produto"
+        [selected]="produto == selecionadoProduto"
+        *ngFor="let produto of produtosSelect"
+      >
+        {{ produto }}
+      </option>
+    </select>
+  </div>
+
+  <div class="col-md-3 col-xs-12" id="divcboStatusDetalhado">
+    <label for="txtBuscaStatusDetalhado">Status Detalhado</label>
+    <select
+      name="cboStatusDetalhado"
+      id="cboStatusDetalhado"
+      class="form-control"
+      (change)="buscarStatusDetalhado($any($event.target).value)"
+    >
+      <option value="todos">Todos</option>
+      <option
+        [value]="status_detail"
+        [selected]="status_detail == statusDetalhadoSelected"
+        *ngFor="let status_detail of statusDetalhadoSelect"
+      >
+        {{ status_detail }}
+      </option>
+    </select>
+  </div>
+
+  <div class="col-md-2 col-xs-12">
+    <label for="txtBuscaStatusDetalhadosss">&nbsp;</label><br>
+      <button type="button" class="btn btn-primary btn-enviar" (click)="rerender()">
+        Recarregar Tabela
+      </button>
+
+  </div>
+
+
+
+</div>
+
+<table
+  datatable
+  [dtOptions]="dtOptions"
+  [dtTrigger]="dtTrigger"
+  class="row-border hover"
+>
+  <thead>
+    <tr>
+      <th
+        class="sorting sorting_asc"
+        tabindex="0"
+        aria-controls="example2"
+        rowspan="1"
+        colspan="1"
+        aria-label="Rendering engine: activate to sort column descending"
+        aria-sort="ascending"
+      >
+        Proposta
+      </th>
+      <th>CPF</th>
+      <th>Data de envio</th>
+      <th>Valor financiado</th>
+      <th>Taxa Anual</th>
+      <th>Status Detalhado</th>
+      <th>Canal de entrada</th>
+      <th>Produto</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let p of propostas">
+      <td>{{ p.id_proposta }}</td>
+      <td>{{ p.cpf_cliente}}</td>
+      <td>{{ p.datas.envio | date: "dd/MM/yyyy" }}</td>
+      <td>
+        {{ p.valores.credito_solicitado | currency: "BRL":true:"1.2-2":"pt" }}
+      </td>
+      <td>{{ p.valores.taxa_juros_anual.toFixed(2).replace(".", ",") }}%</td>
+      <td [ngClass]="verificarStatus( p.status.descricao_credito)"><span>{{ p.status.descricao_credito }}</span></td>
+      <td>{{ p.canal_entrada }}</td>
+      <td>{{ p.produto }}</td>
+    </tr>
+  </tbody>
+</table>

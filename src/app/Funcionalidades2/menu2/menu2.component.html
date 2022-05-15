@@ -1,0 +1,110 @@
+<!-- Page Content -->
+<div class="container main-container">
+  <!-- Jumbotron Header -->
+  <header class="my-4">
+    <h1 class="display-3"><b> Gerenciamento de Menu </b></h1>
+  </header>
+
+
+
+
+  <form class="mbr-form" [formGroup]="menuForm">
+    <div class="row row-sm-offset">
+      <div class="col-md-4 multi-horizontal" data-for="email">
+        <div class="form-group">
+          <label class="form-control-label mbr-fonts-style display-7"
+            >Menu</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="Menu"
+            [ngModel]="menu?.name"
+            formControlName="name"
+          />
+        </div>
+      </div>
+      <div class="col-md-4 multi-horizontal" data-for="phone">
+        <div class="form-group">
+          <label class="form-control-label mbr-fonts-style display-7"
+            >Link</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="Link"
+            [ngModel]="menu?.link"
+            formControlName="link"
+          />
+        </div>
+      </div>
+    </div>
+
+    <span class="input-group-btn">
+      <button
+        class="btn btn-danger"
+        (click)="cadastrarMenu(menuForm.value)"
+        [disabled]="!menuForm.valid || menuForm.value.id"
+      >
+        CRIAR MENU
+      </button>
+
+      <button
+        type="submit"
+        class="btn btn-primary btn-form display-4"
+        (click)="updateMenu(menuForm.value)"
+        [disabled]="!menuForm.valid"
+      >
+        Editar
+      </button>
+    </span>
+  </form>
+
+  <br />
+
+  <table
+    class="row-border table table-bordered table-hover dataTable dtr-inline collapsed"
+    aria-describedby="example2_info"
+  >
+    <thead>
+      <tr>
+        <th>MENU</th>
+        <th>LINK</th>
+        <th>ADMIN</th>
+        <th>EXACT</th>
+        <th>EDITAR</th>
+        <th>EXCLUIR</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of menus">
+        <td>{{ item.name }}</td>
+        <td>{{ item.link }}</td>
+        <td>{{ item.admin }}</td>
+        <td>{{ item.exact }}</td>
+        <td align="center">
+          <button class="btn btn-primary" (click)="carregarParaEdicao(item)">
+            X
+          </button>
+        </td>
+        <td align="center">
+          <button
+            class="btn btn-danger"
+            data-toggle="modal"
+            data-target="#exampleModal"
+            (click)="abrirModal(item)"
+          >
+            X
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<br />
+
+<app-modal
+*ngIf="modal"
+[enderecoObjDoComponente]="objMenuParaFilho"
+(enviarParaOPaiEmit)="deletarMenu($event)"></app-modal>
+

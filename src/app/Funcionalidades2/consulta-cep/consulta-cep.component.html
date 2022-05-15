@@ -1,0 +1,141 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card card-primary">
+      <div class="card-header">
+        <h3 class="card-title">Buscar Cep</h3>
+      </div>
+
+        <div class="card-body">
+          <div class="row">
+            <div class="form-group">
+              <label style="padding: 7px;">CEP: </label>
+            </div>
+            <div class="form-group col-md-4" >
+                <input type="text" class="form-control" placeholder="Informe o CEP" [formControl]="txt_cep">
+            </div>
+            <div class="form-group col-md-6" >
+                <button type="submit"  class="btn btn-primary" (click)="consultarCEP()">Buscar CEP</button>
+              </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+
+
+
+
+  <div class="row">
+    <div class="col-md-12">
+  <form novalidate [formGroup]="cadastroForm">
+
+      <div class="card card-danger">
+        <div class="card-header">
+          <h3 class="card-title">Endereço</h3>
+        </div>
+        <div class="card-body">
+
+          <div class="row">
+              <div class="form-group col-md-6">
+                <label>ENDEREÇO</label>
+                <input type="text" class="form-control" placeholder="Endereço" id="logradouro" formControlName="logradouro"
+
+                [(ngModel)]="enderecoObj.logradouro"
+
+                [ngClass]="{'is-invalid': cadastroForm.get('logradouro').errors && (cadastroForm.get('logradouro').dirty  || cadastroForm.get('logradouro').touched)}"
+
+                />
+
+                <span class="text-danger"
+                *ngIf="cadastroForm.get('logradouro')?.errors?.['required'] && (cadastroForm.get('logradouro').dirty  || cadastroForm.get('logradouro').touched)">
+                <p >Preencha o campo Endereço</p>
+                </span>
+              </div>
+
+              <div class="form-group col-md-6">
+                <label>COMPLEMENTO</label>
+                <input type="text" class="form-control" placeholder="Complemento" id="complemento" formControlName="complemento"
+
+                [ngClass]="{'is-invalid': cadastroForm.get('complemento').errors?.['required'] && (cadastroForm.get('complemento').dirty  || cadastroForm.get('complemento').touched)}"/>
+
+                <span class="text-danger"
+                *ngIf="cadastroForm.get('complemento')?.errors?.['required'] && (cadastroForm.get('complemento').dirty  || cadastroForm.get('complemento').touched)">
+                <p >Preencha o campo Complemento</p>
+                </span>
+
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="form-group col-md-6">
+              <label>Bairro</label>
+              <input type="text" class="form-control" placeholder="Bairro" id="bairro" formControlName="bairro"
+
+              [(ngModel)]="enderecoObj.bairro"
+
+              [ngClass]="{'is-invalid': cadastroForm.get('bairro').errors?.['required'] && (cadastroForm.get('bairro').dirty  || cadastroForm.get('bairro').touched)}"/>
+
+              <span class="text-danger"
+              *ngIf="cadastroForm.get('bairro')?.errors?.['required'] && (cadastroForm.get('bairro').dirty  || cadastroForm.get('bairro').touched)">
+              <p >Preencha o campo Bairro</p>
+              </span>
+
+            </div>
+            <div class="form-group  col-md-6">
+              <label>Cidade</label>
+              <!-- <input type="text" class="form-control" placeholder="Cidade" [(ngModel)]=EnderecoRecebido.localidade  formControlName="localidade"> -->
+
+              <select class="form-control "  [(ngModel)]="enderecoObj.localidade" formControlName="localidade" >
+                          <option value="Selecione">SELECIONE A CIDADE</option>
+                          <option value="Suzano">SUZANO</option>
+                          <option value="Mogi das Cruzes">MOGI DAS CRUZES</option>
+                          <option value="Campos Gerais">CAMPOS GERAIS</option>
+              </select>
+             </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-1">
+              <label>UF</label>
+              <!-- <input type="text" class="form-control" placeholder="Cidade" [(ngModel)]=EnderecoRecebido.uf  formControlName="uf"> -->
+              <select class="form-control "  [(ngModel)]="enderecoObj.uf" (ngModelChange)="trocarEstado($event)" formControlName="uf" >
+                <option value="Selecione">-</option>
+                <option value="SP">SP</option>
+                <option value="MG">MG</option>
+
+              </select>
+            </div>
+            <div class="form-group col-md-3">
+              <label>IBGE</label>
+              <input type="text" class="form-control" placeholder="IBGE" [(ngModel)]="enderecoObj.ibge" formControlName="ibge">
+            </div>
+            <div class="form-group col-md-3">
+              <label>GIA</label>
+              <input type="text" class="form-control" placeholder="GIA" [(ngModel)]="enderecoObj.gia" formControlName="gia">
+            </div>
+
+            <div class="form-group  col-md-3">
+              <label>DDD</label>
+              <input type="text" class="form-control" placeholder="DDD" [(ngModel)]="enderecoObj.ddd" formControlName="ddd">
+            </div>
+
+            <div class="form-group col-md-2">
+              <label>SIAFI</label>
+              <input type="text" class="form-control" placeholder="SIAFI" [(ngModel)]="enderecoObj.siafi" formControlName="siafi">
+            </div>
+
+            <div class="form-group col-md-2">
+              <button class="btn btn-success">CADASTRAR</button>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+  </form>
+</div>
+</div>
+
+
+
+

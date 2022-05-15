@@ -1,0 +1,10 @@
+<div class="container main-container">
+
+  <app-produto-count [produtos]="produtos"></app-produto-count>
+
+  <div class="row text-center">
+
+    <app-produto-card-detalhe class="col-md-4" *ngFor="let produto of produtos;" [produto]="produto"></app-produto-card-detalhe>
+
+  </div>
+</div>
