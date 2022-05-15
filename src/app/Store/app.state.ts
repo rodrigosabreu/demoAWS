@@ -9,11 +9,11 @@ export interface IAppStateTitulo{
 }
 
 export const appInitialState: IAppState = {
-  nome:  "Rodrigo"
+  nome:  "Usuário"
 }
 
 export const appInitialStateTitulo: IAppStateTitulo = {
-  titulo:  "Instancia 2"
+  titulo:  "Plataforma"
 }
 
 
