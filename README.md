@@ -14,5 +14,8 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
+## Url
+https://d2qi7nav5cfaq9.cloudfront.net/
+
 ## AWS Architecture
 <img src="arquitetura.jpg">
