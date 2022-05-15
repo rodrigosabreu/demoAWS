@@ -7,8 +7,6 @@ import { Observable } from 'rxjs';
 })
 export class CepService {
 
-  protected UrlServiceV1: string = "http://localhost:3000/"
-
   constructor(private http: HttpClient) { }
 
   obterEndereco(cep: string): Observable<any>{
