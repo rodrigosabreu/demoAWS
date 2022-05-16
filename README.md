@@ -18,4 +18,4 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 https://d2qi7nav5cfaq9.cloudfront.net/
 
 ## AWS Architecture
-<img src="arquitetura2.jpg">
+<img src="arquitetura3.jpg">
