@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store'
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
-import { nomeReducer, tituloReducer } from './Store/app.state';
+import { reducer } from './Store/app.state';
 
 
 
@@ -17,7 +17,7 @@ import { nomeReducer, tituloReducer } from './Store/app.state';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    StoreModule.forRoot({app: nomeReducer, app2: tituloReducer}, {}),
+    StoreModule.forRoot({app: reducer}),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
       logOnly: environment.production, // Restrict extension to log-only mode
